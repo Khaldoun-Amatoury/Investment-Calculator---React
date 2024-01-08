@@ -1,6 +1,8 @@
-import { useState } from "react";
+export default function UserInput({ onChange, userInput }) {
+  //IMP
+  //We lifted this userInput state up from the UserInput component to the app component as results components needs some functionality from userinput components so they are both linked in app so the state and the function handler should be in app component
 
-export default function UserInput() {
+  /*
   // here we could've made a state for each input but it is not a good practice so we made one state which binds all inputs together into one state with one handle function
   const [userInput, setUserInput] = useState({
     initialInvestment: 10000,
@@ -17,7 +19,7 @@ export default function UserInput() {
       };
     });
   }
-
+*/
   return (
     <section id="user-input">
       <div className="input-group">
@@ -29,7 +31,7 @@ export default function UserInput() {
             required
             value={userInput.initialInvestment}
             onChange={(event) =>
-              handleChange("initialInvestment", event.target.value)
+              onChange("initialInvestment", event.target.value)
             }
           />
         </p>
@@ -38,9 +40,9 @@ export default function UserInput() {
           <input
             type="number"
             required
-            value={userInput.annualInvestmnet}
+            value={userInput.annualInvestment}
             onChange={(event) =>
-              handleChange("annualInvestmnet", event.target.value)
+              onChange("annualInvestment", event.target.value)
             }
           />
         </p>
@@ -53,9 +55,7 @@ export default function UserInput() {
             type="number"
             required
             value={userInput.expectedReturn}
-            onChange={(event) =>
-              handleChange("expectedReturn", event.target.value)
-            }
+            onChange={(event) => onChange("expectedReturn", event.target.value)}
           />
         </p>
         <p>
@@ -64,7 +64,7 @@ export default function UserInput() {
             type="number"
             required
             value={userInput.duration}
-            onChange={(event) => handleChange("duration", event.target.value)}
+            onChange={(event) => onChange("duration", event.target.value)}
           />
         </p>
       </div>
