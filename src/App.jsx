@@ -2,6 +2,8 @@ import { useState } from "react";
 import Header from "./components/Header.jsx";
 import UserInput from "./components/UserInput.jsx";
 import Results from "./components/Results.jsx";
+//problem: there is a bug which is when we enter negative duration or 0 duration value the app crashes
+//solution: we want to make sure that the results component is output conditionally, it should only output if we have valid user input
 
 function App() {
   const [userInput, setUserInput] = useState({
@@ -10,6 +12,8 @@ function App() {
     expectedReturn: 6,
     duration: 10,
   });
+
+  const inputIsValid = userInput.duration >= 1;
 
   function handleChange(inputIdentifier, newValue) {
     setUserInput((prevUserInput) => {
@@ -24,7 +28,10 @@ function App() {
     <>
       <Header />;
       <UserInput userInput={userInput} onChange={handleChange} />;
-      <Results input={userInput} />
+      {!inputIsValid && (
+        <p className="center">Please enter a duration greater than zero.</p>
+      )}
+      {inputIsValid && <Results input={userInput} />}
     </>
   );
 }
